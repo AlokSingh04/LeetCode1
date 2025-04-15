@@ -1,16 +1,28 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> ans;
-        for(int i = 0; i < nums.size(); i++){
-            auto it = find(nums.begin(), nums.end(), target - nums[i]);
-            if(it != nums.end() && (it - nums.begin() != i)){
-                ans.push_back(i);
-                ans.push_back(it - nums.begin());
-                return ans;
-            }  
+        int n = nums.size();
+        vector<pair<int,int>> map = {};
+        for(int i=0;i<n;i++){
+            map.push_back({nums[i],i});
         }
-        return ans;
+        
+        sort(map.begin(),map.end());
 
+        int l=0, r=n-1;
+        while(l<r){
+            int value = map[l].first + map[r].first;
+            if(value > target){
+                r--;
+            } else if(value < target){
+                l++;
+            } else {
+                return {
+                    min(map[l].second, map[r].second),
+                    max(map[l].second, map[r].second)
+                };
+            }
+        }
+        return {};
     }
 };
