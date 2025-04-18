@@ -8,9 +8,9 @@ public:
             if(i>0 && nums[i] == nums[i-1]){
                 continue;
             }
+
             int j = i+1;
             int k = nums.size()-1;
-
             while(j<k){
                 int sum = nums[i]+nums[j]+nums[k];
 
